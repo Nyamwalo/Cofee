@@ -1,0 +1,22 @@
+const { MongoClient } = require("mongodb");
+
+const uri =
+  "mongodb+srv://deez:Ochuodho90*@cluster0.gz7xy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
+const client = new MongoClient(uri);
+
+async function run() {
+  try {
+    const database = client.db("Referral_codes");
+    const Referrals = database.collection("Referrals");
+
+    // Query for address "Siaya"
+    const query = { address: "Siaya" };
+    const Referral = await Referrals.findOne(query);
+
+    console.log(Referral);
+  } finally {
+    await client.close();
+  }
+}
+run().catch(console.dir);
